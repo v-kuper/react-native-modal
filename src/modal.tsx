@@ -391,12 +391,6 @@ export class ReactNativeModal extends React.Component<ModalProps, State> {
           const newOpacityFactor =
               1 - this.calcDistancePercentage(gestureState);
 
-          // todo: fix backdropOpacity
-          // this.backdropRef &&
-          //   this.backdropRef.transitionTo({
-          //     opacity: this.props.backdropOpacity * newOpacityFactor,
-          //   });
-
           animEvt!(evt, gestureState);
 
           if (this.props.onSwipeMove) {
@@ -451,12 +445,6 @@ export class ReactNativeModal extends React.Component<ModalProps, State> {
         if (this.props.onSwipeCancel) {
           this.props.onSwipeCancel(gestureState);
         }
-
-        // if (this.backdropRef) {
-        //   this.backdropRef.transitionTo({
-        //     opacity: this.props.backdropOpacity,
-        //   });
-        // }
 
         Animated.spring(this.state.pan!, {
           toValue: {x: 0, y: 0},
@@ -634,14 +622,6 @@ export class ReactNativeModal extends React.Component<ModalProps, State> {
       return;
     }
     this.isTransitioning = true;
-
-    // todo: fix backdropOpacity
-    // if (this.backdropRef) {
-    //   this.backdropRef.transitionTo(
-    //     {opacity: 0},
-    //     this.props.backdropTransitionOutTiming,
-    //   );
-    // }
 
     let animationOut = this.animationOut;
 
