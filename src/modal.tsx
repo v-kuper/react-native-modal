@@ -449,11 +449,11 @@ export class ReactNativeModal extends React.Component<ModalProps, State> {
           this.props.onSwipeCancel(gestureState);
         }
 
-        if (this.backdropRef) {
-          this.backdropRef.transitionTo({
-            opacity: this.props.backdropOpacity,
-          });
-        }
+        // if (this.backdropRef) {
+        //   this.backdropRef.transitionTo({
+        //     opacity: this.props.backdropOpacity,
+        //   });
+        // }
 
         Animated.spring(this.state.pan!, {
           toValue: {x: 0, y: 0},
@@ -594,19 +594,18 @@ export class ReactNativeModal extends React.Component<ModalProps, State> {
       return;
     }
     this.isTransitioning = true;
-    if (this.backdropRef) {
-      this.backdropRef.transitionTo(
-        {opacity: this.props.backdropOpacity},
-        this.props.backdropTransitionInTiming,
-      );
-    }
 
-    // This is for resetting the pan position,otherwise the modal gets stuck
-    // at the last released position when you try to open it.
-    // TODO: Could certainly be improved - no idea for the moment.
-    if (this.state.isSwipeable) {
-      this.state.pan!.setValue({x: 0, y: 0});
-    }
+    this.setState({showContent: true}, () => {
+      if (this.backdropRef) {
+        this.backdropRef.transitionTo(
+            {opacity: this.props.backdropOpacity},
+            this.props.backdropTransitionInTiming,
+        );
+      }
+
+      if (this.state.pan) {
+        this.state.pan.setValue({x: 0, y: 0});
+      }
 
     if (this.contentRef) {
       this.props.onModalWillShow && this.props.onModalWillShow();
