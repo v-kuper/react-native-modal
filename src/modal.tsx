@@ -606,10 +606,6 @@ export class ReactNativeModal extends React.Component<ModalProps, State> {
         );
       }
 
-      if (this.state.pan) {
-        this.state.pan.setValue({x: 0, y: 0});
-      }
-
       if (this.contentRef) {
         this.props.onModalWillShow && this.props.onModalWillShow();
         if (this.interactionHandle == null) {
@@ -693,6 +689,9 @@ export class ReactNativeModal extends React.Component<ModalProps, State> {
                     );
                   },
               );
+              if (this.state.pan) {
+                this.state.pan.setValue({x: 0, y: 0});
+              }
             }
           });
     }
