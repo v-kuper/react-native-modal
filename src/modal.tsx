@@ -669,6 +669,7 @@ export class ReactNativeModal extends React.Component<ModalProps, State> {
                     );
                   },
               );
+
               if (this.state.pan) {
                 this.state.pan.setValue({x: 0, y: 0});
               }
